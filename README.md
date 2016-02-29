@@ -17,7 +17,7 @@ Commands:
 
 ## To install
 1. Download the raw file from github:
-https://raw.github.com/galaban/moons/master/Galabans_Ship_Stacker.xml
+https://raw.githubusercontent.com/galaban/LOTJShipStackerTracker/master/Galabans_Ship_StackerTracker.xml
 2. Place the raw file into your "plugins" directory.  This is found in your Mushclient folder under /worlds/plugins.
 3. Install the plugain in MushClient.  From the "File" menu, choose "plugins", then "Add".  Select the file and choose "OK".
 
