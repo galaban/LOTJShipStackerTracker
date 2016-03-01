@@ -365,6 +365,7 @@ function helpShipStack()
     AnsiNote(b_red .. "shipstacker enable"..b_white..":  Umm...enable stacking and tracking")
     Note("")
     AnsiNote(b_red .. "shipstacker locatenext"..b_white..":   Locates the first unowned ship")
+    AnsiNote(b_red .. "shipstacker deletenext"..b_white..":   Deletes the first unowned ship")
     AnsiNote(b_red .. "shipstacker locateoldest"..b_white..": Locates the oldest located ship")
     Note("")
     AnsiNote(b_red .. "shipstacker db <option>"..b_white..":  Ship database functions")
@@ -450,6 +451,8 @@ function formatShipStack(rName, rLine, rWildcards, rStyles)
         AnsiNote(b_red.."Galaban's Ship Stacker disabled.")
     elseif (option == "locatenext") then
         LocateUnowned()
+    elseif (option == "deletenext") then
+        DeleteUnowned()
     elseif (option == "locateoldest") then
         LocateOldest()
     elseif (splitOpts[1] == "db") then
@@ -490,6 +493,18 @@ function LocateUnowned()
     Note("")
     AnsiNote(b_white.."Locating Ship: "..b_green..nextUnowned)
     Send("locateship "..nextUnowned)
+end
+
+function DeleteUnowned()
+    local nextUnowned = nil
+    nextUnowned = LookupNextUnownedShip()
+    if (nextUnowned == nil) then
+        AnsiNote(b_yellow.."No unowned ships found in the database.")
+        return
+    end
+    Note("")
+    AnsiNote(b_white.."Dropping Ship: "..b_green..nextUnowned)
+    DropShip(nextUnowned)
 end
 
 function LocateOldest()
