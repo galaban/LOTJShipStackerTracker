@@ -491,7 +491,7 @@ end
 
 function LocateUnowned()
     local nextUnowned = nil
-    nextUnowned = LookupNextUnownedShip()
+    nextUnowned = LookupNextUnownedShipFullName()
     if (nextUnowned == nil) then
         AnsiNote(b_yellow.."No unowned ships found in the database.")
         return
@@ -1267,6 +1267,15 @@ function LookupNextUnownedShip()
     if (row == nil) then return nil end
     return row.name
 end
+
+function LookupNextUnownedShipFullName()
+    local row = firstRowQueryDB("SELECT * FROM ships WHERE owner IS NULL ORDER BY name")
+
+    if (row == nil) then return nil end
+    local fullName = row.type .. " '" .. row.name .. "'"
+    return fullName
+end
+
 
 function LookupOldestShip()
     local row = firstRowQueryDB("SELECT * FROM ships WHERE last_lookup IS NOT NULL ORDER BY last_lookup")
